@@ -14,12 +14,12 @@ getArticleList();
 
     function getArticleList() {
 
-      var searchFor = "fiets"; //document.getElementById('intext').value;
-      var response = "";
-      console.log(searchFor);
+      //var searchFor = "fiets"; //document.getElementById('intext').value;
+      //var response = "";
+      //console.log(searchFor);
       $.ajax({
-        url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + searchFor + "&limit=5",
-        dataType: 'jsonp',
+        url: url,
+        dataType: 'json',
         success: function (data) {
           console.log(data);
           response = data;
