@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <script>
+    //fetch("https://en.wikipedia.org//w/api.php?action=opensearch&format=json&origin=*&search=stack&limit=10")
+    var url = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/nl.wikipedia/all-access/all-agents/Museum_Boijmans_Van_Beuningen/monthly/2016010100/2016123100"
+
+getArticleList();
+
+    function getArticleList() {
+
+      var searchFor = "fiets"; //document.getElementById('intext').value;
+      var response = "";
+      console.log(searchFor);
+      $.ajax({
+        url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=" + searchFor + "&limit=5",
+        dataType: 'jsonp',
+        success: function (data) {
+          console.log(data);
+          response = data;
+        }
+      }).done(function (response) {
+        console.log(response);
+        //document.getElementsByTagName("h2").innerHTML += response.object[1];
+        
+     
+      })
+    }
+
+//    "centralauthtoken": {
+  //      "centralauthtoken": "47cd9cdb4ac7b62edfa438ae425a6f82309ef29"
+   // }
+  </script>
+
+  <div class="container-fluid">
+    <div class="row text-center">
+      <h2>Cat Photo Finder</h2>
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-12 well message">
+        The message will go here
+      </div>
+    </div>
+    <div class="row text-center">
+      <div class="col-xs-12">
+        <button id="getMessage" class="btn btn-primary">
+        Get Message
+      </button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

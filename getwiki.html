@@ -1,0 +1,41 @@
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<script>
+  $(document).ready(function() {
+
+    $("#getMessage").on("click", function(){
+      // Only change code below this line.
+    var url= "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/nl.wikipedia/all-access/all-agents/Museum_Boijmans_Van_Beuningen/monthly/2016010100/2016123100"  
+      $.getJSON(url, function(json) {
+  $(".message").html(JSON.stringify(json));
+});
+      
+      // Only change code above this line.
+    });
+
+  });
+</script>
+
+<div class="container-fluid">
+  <div class = "row text-center">
+    <h2>Cat Photo Finder</h2>
+  </div>
+  <div class = "row text-center">
+    <div class = "col-xs-12 well message">
+      The message will go here
+    </div>
+  </div>
+  <div class = "row text-center">
+    <div class = "col-xs-12">
+      <button id = "getMessage" class = "btn btn-primary">
+        Get Message
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
