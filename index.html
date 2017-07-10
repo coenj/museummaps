@@ -3,68 +3,53 @@
 
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-</head>
 
-<body>
+
+
   <script>
-    var searchpage = "Chabot_Museum"
-    var date = new Date(Date.now())
-    var endDate = shortDate(date.toISOString())
-
-    // change date to 1 month before on 1st day
-    console.log(date)
-    date.setMonth(date.getMonth() - 1);
-    date.setDate(1);
-    var startDate = shortDate(date.toISOString())
-
-    console.log(startDate)
-
-    var url = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/all-agents/" + searchpage + "/monthly/" + startDate + "/" + endDate
-    console.log(endDate)
-
-    // getArticleList();
+  
+    getPageViews("Kunsthal");
 
     function shortDate(passedDate) {
-
       passedDate = passedDate.slice(0, 10).replace(/-/g, "")
-
       return passedDate
-
     }
 
-    function doubleDigit(number) {
-      return ("0" + number).slice(-2)
-    }
+    function getPageViews(searchpage) {
 
-    function getArticleList() {
-
-      //var searchFor = "fiets"; //document.getElementById('intext').value;
-      //var response = "";
-      //console.log(searchFor);
       window.onload = function () {
+        var date = new Date(Date.now())
+        var endDate = shortDate(date.toISOString())
+
+        // change date to 1 month before on 1st day
+        console.log(date)
+        date.setMonth(date.getMonth() - 1);
+        date.setDate(1);
+        var startDate = shortDate(date.toISOString())
+
+        console.log(startDate)
+        var url = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/all-agents/" + searchpage + "/monthly/" + startDate + "/" + endDate
 
         $.ajax({
           url: url,
           dataType: 'json',
           success: function (data) {
-            //console.log(data);
             response = data;
           }
         }).done(function (response) {
           console.log(response);
           console.log(response.items[0].views); // <<< number of views of this page!
-          console.log("loaded")
+
           document.getElementsByTagName("h2")[0].innerHTML = response.items[0].views
 
 
         })
       }
     }
-//    "centralauthtoken": {
-  //      "centralauthtoken": "47cd9cdb4ac7b62edfa438ae425a6f82309ef29"
-   // }
   </script>
+</head>
 
+<body>
   <div class="container-fluid">
     <div class="row text-center">
       <h2>Cat Photo Finder</h2>
