@@ -8,8 +8,10 @@
 <body>
   <script>
     //fetch("https://en.wikipedia.org//w/api.php?action=opensearch&format=json&origin=*&search=stack&limit=10")
-    var url = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/nl.wikipedia/all-access/all-agents/Museum_Boijmans_Van_Beuningen/monthly/2016010100/2016123100"
-
+    var searchpage="Chabot_Museum"
+    //var url = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/nl.wikipedia/all-access/all-agents/"+searchpage+"/monthly/2016010100/2016123100"
+    //var url ="https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/all-agents/"+searchpage+"/monthly/20170501/20170531"
+    var url ="https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/all-agents/"+searchpage+"/monthly/20170601/20170701"
 getArticleList();
 
     function getArticleList() {
@@ -21,11 +23,12 @@ getArticleList();
         url: url,
         dataType: 'json',
         success: function (data) {
-          console.log(data);
+          //console.log(data);
           response = data;
         }
       }).done(function (response) {
         console.log(response);
+       console.log(response.items[0].views); // <<< number of views of this page!
         //document.getElementsByTagName("h2").innerHTML += response.object[1];
         
      
