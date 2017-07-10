@@ -7,21 +7,30 @@
 
 <body>
   <script>
-    //fetch("https://en.wikipedia.org//w/api.php?action=opensearch&format=json&origin=*&search=stack&limit=10")
     var searchpage = "Chabot_Museum"
-    //var url = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/nl.wikipedia/all-access/all-agents/"+searchpage+"/monthly/2016010100/2016123100"
-    //var url ="https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/all-agents/"+searchpage+"/monthly/20170501/20170531"
-    var startDate = 20170601
-    //var endDate = new Date('December 25, 1995 23:15:30');
-    var endDate = new Date(Date.now())
-    
-    //console.log(endDate)
-    var endDate = endDate.getFullYear() + doubleDigit(1+endDate.getMonth())+doubleDigit(endDate.getDate())
+    var date = new Date(Date.now())
+    var endDate = shortDate(date.toISOString())
+
+    // change date to 1 month before on 1st day
+    console.log(date)
+    date.setMonth(date.getMonth() - 1);
+    date.setDate(1);
+    var startDate = shortDate(date.toISOString())
+
+    console.log(startDate)
 
     var url = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/all-agents/" + searchpage + "/monthly/" + startDate + "/" + endDate
     console.log(endDate)
 
     // getArticleList();
+
+    function shortDate(passedDate) {
+
+      passedDate = passedDate.slice(0, 10).replace(/-/g, "")
+
+      return passedDate
+
+    }
 
     function doubleDigit(number) {
       return ("0" + number).slice(-2)
