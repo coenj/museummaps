@@ -11,8 +11,21 @@
     var searchpage = "Chabot_Museum"
     //var url = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/nl.wikipedia/all-access/all-agents/"+searchpage+"/monthly/2016010100/2016123100"
     //var url ="https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/all-agents/"+searchpage+"/monthly/20170501/20170531"
-    var url = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/all-agents/" + searchpage + "/monthly/20170601/20170701"
-    getArticleList();
+    var startDate = 20170601
+    //var endDate = new Date('December 25, 1995 23:15:30');
+    var endDate = new Date(Date.now())
+    
+    //console.log(endDate)
+    var endDate = endDate.getFullYear() + doubleDigit(1+endDate.getMonth())+doubleDigit(endDate.getDate())
+
+    var url = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia.org/all-access/all-agents/" + searchpage + "/monthly/" + startDate + "/" + endDate
+    console.log(endDate)
+
+    // getArticleList();
+
+    function doubleDigit(number) {
+      return ("0" + number).slice(-2)
+    }
 
     function getArticleList() {
 
@@ -32,7 +45,7 @@
           console.log(response);
           console.log(response.items[0].views); // <<< number of views of this page!
           console.log("loaded")
-          document.getElementsByTagName("h2")[0].innerHTML=response.items[0].views
+          document.getElementsByTagName("h2")[0].innerHTML = response.items[0].views
 
 
         })
