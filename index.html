@@ -33,7 +33,7 @@
     // This example requires the Places library. Include the libraries=places
     // parameter when you first load the API. For example:
     // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
+var mContent;
     var map;
     var infowindow;
     var service;
@@ -52,6 +52,7 @@
 
       function geocodeAddress(geocoder, resultsMap) {
         var address = document.getElementById('address').value;
+        mContent="";
         geocoder.geocode({ 'address': address }, function (results, status) {
           if (status === 'OK') {
             searchcity = results[0].geometry.location;
@@ -96,14 +97,18 @@
 
 
       function getContent() {
-        var mContent=place.name;
-          google.maps.event.addListener(marker, 'click', function () {
+        //var mContent = place.name;
+        mContent += '<div id=' + place.name.replace(/ /g, "_") + '><b>' + place.name.replace(/ /g,"_") + '</b><br> '
+        mContent += '</div><br>';
 
-            infowindow.setContent(mContent);
-            infowindow.open(map, marker);
+       document.getElementById('museum-review').innerHTML += mContent;
+       wikiViews(place.name)
 
-          });
-      // service.getDetails(place, placeReviews);
+        google.maps.event.addListener(marker, 'click', function () {
+          infowindow.setContent(mContent);
+          infowindow.open(map, marker);
+        });
+        // service.getDetails(place, placeReviews);
       }
 
       function placeReviews(result, status) {
