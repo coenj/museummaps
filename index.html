@@ -25,9 +25,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="js/wiki_views.js"></script>
   <script>
-    
-      
-    
+
   </script>
 
 
@@ -98,7 +96,14 @@
 
 
       function getContent() {
-        service.getDetails(place, placeReviews);
+        var mContent=place.name;
+          google.maps.event.addListener(marker, 'click', function () {
+
+            infowindow.setContent(mContent);
+            infowindow.open(map, marker);
+
+          });
+      // service.getDetails(place, placeReviews);
       }
 
       function placeReviews(result, status) {
@@ -128,7 +133,7 @@
               totalRevs++;
             }
           }
-          mContent += '<div id='+result.name.replace(/ /g,"_")+'><b>' + result.name + '</b><br>rating: ' + result.rating;
+          mContent += '<div id=' + result.name.replace(/ /g, "_") + '><b>' + result.name + '</b><br>rating: ' + result.rating;
 
 
           if (sumStars) { mContent += " recent: " + (sumStars / totalRevs).toFixed(1); }
@@ -136,7 +141,7 @@
           mContent += '</div><br>';
 
           document.getElementById('museum-review').innerHTML += mContent;
-wikiViews(result.name)
+          wikiViews(result.name)
           // marker.setIcon("museumIcon.png");
 
 
@@ -161,7 +166,7 @@ wikiViews(result.name)
 
 <body>
   <div id="floating-panel">
-    <input id="address" type="textbox" value="Utrecht">
+    <input id="address" type="textbox" value="Rotterdam">
     <input id="submit" type="button" value="Ok">
   </div>
   <div id="map"></div>
