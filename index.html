@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Museum review</title>
+  <title>Museum maps</title>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
@@ -99,7 +99,7 @@ var mContent;
       function getContent() {
         var markerContent = place.name;
         
-        mContent += '<div id=' + place.name.replace(/ /g, "_") + '><b>' + place.name.replace(/ /g,"_") + '</b><br> '
+        mContent += '<div id=' + place.name.replace(/ /g, "_") + '><b>' + place.name + '</b><br> '
         mContent += '</div><br>';
 
        document.getElementById('museum-review').innerHTML += mContent;
@@ -112,56 +112,7 @@ var mContent;
         // service.getDetails(place, placeReviews);
       }
 
-      function placeReviews(result, status) {
-        totalRevs = 0;
-        if (status !== google.maps.places.PlacesServiceStatus.OK) {
-          console.error(status);
-          return;
-        }
-
-
-        if (result.reviews) {
-          var mContent = "";
-
-          var stars = 0;
-          var sumStars = 0;
-          var reviewTime = 0;
-          var today = Date.now() / 1000;
-
-          console.log(result);
-          for (var i = 0; i < result.reviews.length; i++) {
-
-            var reviewTime = result.reviews[i].time;
-            console.log(reviewTime + "xxxx" + today);
-            if (reviewTime > today - 7776000) {
-              stars = result.reviews[i].rating;
-              sumStars += stars;
-              totalRevs++;
-            }
-          }
-          mContent += '<div id=' + result.name.replace(/ /g, "_") + '><b>' + result.name + '</b><br>rating: ' + result.rating;
-
-
-          if (sumStars) { mContent += " recent: " + (sumStars / totalRevs).toFixed(1); }
-
-          mContent += '</div><br>';
-
-          document.getElementById('museum-review').innerHTML += mContent;
-          wikiViews(result.name)
-          // marker.setIcon("museumIcon.png");
-
-
-
-          google.maps.event.addListener(marker, 'click', function () {
-
-            infowindow.setContent(mContent);
-            infowindow.open(map, marker);
-
-          });
-        }
-        console.log(result, status);
-
-      }
+   
       getContent();
 
 
