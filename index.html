@@ -97,7 +97,8 @@ var mContent;
 
 
       function getContent() {
-        //var mContent = place.name;
+        var markerContent = place.name;
+        
         mContent += '<div id=' + place.name.replace(/ /g, "_") + '><b>' + place.name.replace(/ /g,"_") + '</b><br> '
         mContent += '</div><br>';
 
@@ -105,7 +106,7 @@ var mContent;
        wikiViews(place.name)
 
         google.maps.event.addListener(marker, 'click', function () {
-          infowindow.setContent(mContent);
+          infowindow.setContent(markerContent);
           infowindow.open(map, marker);
         });
         // service.getDetails(place, placeReviews);

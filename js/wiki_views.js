@@ -27,7 +27,7 @@ searchpage=searchpage.replace(/ /g,"_")
         }).done(function (response) {
             console.log(response);
             console.log(response.items[0].views); // <<< number of views of this page!
-            document.getElementById(searchpage).innerHTML+=" wiki views:" + response.items[0].views+"<br>"
+            document.getElementById(searchpage).innerHTML+=" wiki views:<b>" + response.items[0].views+"</b><br>"
             var result = response.items[0].views
             return result
 
