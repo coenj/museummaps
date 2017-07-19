@@ -1,0 +1,91 @@
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+@import "normalize.css";
+@import url('https://fonts.googleapis.com/css?family=PT+Sans');
+
+*{
+    border: 1px solid black; 
+}
+
+#map {
+      height: 33%;
+    }
+    /* Optional: Makes the sample page fill the window. */
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'PT Sans', sans-serif;
+    }
+ 
+#museum-review {
+padding: .75rem;
+}
+.place{
+    display: flex;
+    align-items: center;
+    height: 2.25rem;
+}
+.place-name{
+       display: flex;
+       padding: 0 .5rem;
+
+    
+}
+
+.place-viewbox{
+    order: -1;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
+    border-radius: 100%;
+}
+
+.place-views {  
+    color: whitesmoke;
+    }
+
+    #floating-panel {
+      margin: 1rem;
+    background-color: green;
+    color: white;
+    border-color: white;
+    border-style: none;
+    border-radius: 1rem;
+    padding: .75rem;
+}
+
+input#address {
+    color: white;
+    background-color: green;
+    border-color: white;
+    border-style: none;
+    border-radius: 1rem;
+    
+    }
+
+input#address::placeholder{
+    color: whitesmoke;
+}
+
+input#submit {
+   font-size: 0px;
+    line-height: 1.5rem;
+    color: white;
+    border-color: white;
+    border-style: none;
+    background: url(../images/Search_font_awesome.svg) top left no-repeat;
+    height: 1rem;
+    width: 1rem;
+    padding: 0;
+    margin: 0px;
+}
+
+
+
+    
