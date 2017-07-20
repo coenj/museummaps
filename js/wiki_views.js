@@ -3,8 +3,9 @@ function shortDate(passedDate) {
     return passedDate
 }
 
-function wikiViews(pageName, searchPage) {
+function wikiViews(pageName, searchPage, placeLoc) {
     // ask mediawiki api for the views of 1 month ago
+    console.log(typeof(placeLoc))
     var date = new Date(Date.now())
     var endDate = shortDate(date.toISOString())
     var viewBox, url, startDate
@@ -31,8 +32,9 @@ function wikiViews(pageName, searchPage) {
         var viewColor=`style="background-color: rgb(0,25,${viewScore})"`
         viewBox = `<div class=place-viewbox ${viewColor}><div class=place-views>${viewScore}</div></div>`
         content = `<div class=place id=${searchPage}><div class=place-name><a href=https://en.wikipedia.org/wiki/${searchPage}>${pageName}</a></div>${viewBox}</div>`
+        content+='<div onclick="createMarker('+placeLoc+')">location</div>'
         document.getElementById('top-container').innerHTML += content;
-        
+        createMarker(placeLoc)
         return viewScore
 
     }).fail(function () {

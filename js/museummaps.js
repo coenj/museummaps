@@ -5,6 +5,7 @@
 var map;
 var infowindow;
 var service;
+var placeLoc ={};
 function initMap() {
   var searchcity = { lat: 51.908082, lng: 4.480408 };
 
@@ -51,38 +52,43 @@ function initMap() {
 function callback(results, status) {
   if (status === google.maps.places.PlacesServiceStatus.OK) {
     for (var i = 0; i < results.length; i++) {
-      createMarker(results[i]);
+      createPlaceList(results[i]);
     }
   }
 }
 
-function createMarker(place) {
+function createPlaceList(place) {
 
-  var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
-    map: map,
-    position: placeLoc
-  });
+  placeLoc = place.geometry.location;
+  var placeNameWiki = place.name.replace(/ /g, "_")
+  wikiViews(place.name, placeNameWiki, placeLoc)
+  console.log(placeLoc)
+  // createMarker(placeLoc, place)
 
+}
 
-  function getContent() {
-    var markerContent = place.geometry.location + place.name + place.opening_hours;
-    var placeNameWiki = place.name.replace(/ /g, "_")
+  function createMarker(placeLoc, place) {
+    console.log(typeof(placeLoc))
+    var marker = new google.maps.Marker({
+      map: map,
+      position: placeLoc
+    });
+    //if(place){getContent(marker,place);}
+  }
+
+  function getContent(marker, place) {
+    var placeContent = place.geometry.location + place.name + place.opening_hours;
+   
     /*
         if (place.photos != undefined) {
            var photoUrl = place.photos[0].getUrl({maxWidth: 400, maxHeight: 400});
-          markerContent ="<img src="+ photoUrl +">"
-          console.log(markerContent)
+          placeContent ="<img src="+ photoUrl +">"
+          console.log(placeContent)
         }
-    */
-
-    wikiViews(place.name, placeNameWiki)
-
+   
+  */
     google.maps.event.addListener(marker, 'click', function () {
-      infowindow.setContent(markerContent);
+      infowindow.setContent(placeContent);
       infowindow.open(map, marker);
     });
   }
-
-  getContent();
-}
