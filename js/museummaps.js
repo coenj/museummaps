@@ -16,13 +16,13 @@ function initMap() {
 
   document.getElementById('submit').addEventListener('click', function () {
     document.getElementById('top-container').innerHTML = "";
-  document.getElementById('bottom-container').innerHTML = "";
+    document.getElementById('bottom-container').innerHTML = "";
     geocodeAddress(geocoder, map);
   });
 
   function geocodeAddress(geocoder, resultsMap) {
     var address = document.getElementById('address').value;
-    mContent = "";
+    content = "";
     geocoder.geocode({ 'address': address }, function (results, status) {
       if (status === 'OK') {
         searchcity = results[0].geometry.location;
@@ -38,7 +38,7 @@ function initMap() {
           location: searchcity,
           radius: 5000,
           type: ['museum'],
-          keyword: 'art' 
+          keyword: 'art'
         }, callback);
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
@@ -57,7 +57,7 @@ function callback(results, status) {
 }
 
 function createMarker(place) {
- 
+
   var placeLoc = place.geometry.location;
   var marker = new google.maps.Marker({
     map: map,
@@ -67,15 +67,15 @@ function createMarker(place) {
 
   function getContent() {
     var markerContent = place.geometry.location + place.name + place.opening_hours;
-    var placeNameWiki= place.name.replace(/ /g, "_")
-/*
-    if (place.photos != undefined) {
-       var photoUrl = place.photos[0].getUrl({maxWidth: 400, maxHeight: 400});
-      markerContent ="<img src="+ photoUrl +">"
-      console.log(markerContent)
-    }
-*/
-    
+    var placeNameWiki = place.name.replace(/ /g, "_")
+    /*
+        if (place.photos != undefined) {
+           var photoUrl = place.photos[0].getUrl({maxWidth: 400, maxHeight: 400});
+          markerContent ="<img src="+ photoUrl +">"
+          console.log(markerContent)
+        }
+    */
+
     wikiViews(place.name, placeNameWiki)
 
     google.maps.event.addListener(marker, 'click', function () {
