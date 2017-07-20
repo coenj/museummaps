@@ -34,7 +34,7 @@ function wikiViews(pageName, searchPage, placeLoc) {
         content = `<div class=place id=${searchPage}><div class=place-name><a href=https://en.wikipedia.org/wiki/${searchPage}>${pageName}</a></div>${viewBox}</div>`
         content+='<div onclick="createMarker('+placeLoc+')">location</div>'
         document.getElementById('top-container').innerHTML += content;
-        createMarker(placeLoc)
+      
         return viewScore
 
     }).fail(function () {
