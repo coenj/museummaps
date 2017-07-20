@@ -1,7 +1,7 @@
 // This example requires the Places library. Include the libraries=places
 // parameter when you first load the API. For example:
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-var mContent;
+
 var map;
 var infowindow;
 var service;
@@ -15,6 +15,8 @@ function initMap() {
   var geocoder = new google.maps.Geocoder();
 
   document.getElementById('submit').addEventListener('click', function () {
+    document.getElementById('top-container').innerHTML = "";
+  document.getElementById('bottom-container').innerHTML = "";
     geocodeAddress(geocoder, map);
   });
 
@@ -34,9 +36,9 @@ function initMap() {
         service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
           location: searchcity,
-          radius: 3000,
+          radius: 5000,
           type: ['museum'],
-          keyword: 'art'
+          keyword: 'art' 
         }, callback);
       } else {
         alert('Geocode was not successful for the following reason: ' + status);
@@ -55,7 +57,7 @@ function callback(results, status) {
 }
 
 function createMarker(place) {
-  document.getElementById('museum-review').innerHTML = "";
+ 
   var placeLoc = place.geometry.location;
   var marker = new google.maps.Marker({
     map: map,
